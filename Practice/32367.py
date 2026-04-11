@@ -9,14 +9,18 @@ class Trader:
         "TOMATOES": 80,
     }
     # 来自历史盘口统计：bid 侧量相对更重时，下一跳 mid 更易上行（见 strategy_research.py）
+    # From historical book stats: when bid-side size is heavier, the next mid tick is more likely to move up (see strategy_research.py).
     IMB_TILT_EMERALD = 1.05
     IMB_TILT_TOMATO = 2.0
     # 番茄 fair：EWMA 比「最后 30 个 micro 的均值」反应更快，减少 systematic 滞后
+    # Tomato fair: EWMA reacts faster than the mean of the last 30 micro prices, reducing systematic lag.
     TOMATO_EWMA_ALPHA = 0.38
     # micro 相对上一期 fair 的意外抬高 → 提高买入门槛（数据里有短周期反转）
+    # Micro unexpectedly above prior fair → raise buy hurdle (short-horizon mean reversion in the data).
     TOMATO_FADE_COEF = 0.48
     EMERALD_FADE_COEF = 0.32
     # 吃单最小优势：随 spread 放大，避免在噪声边沿零碎成交
+    # Minimum edge to hit: scales with spread to avoid tiny fills at noisy edges.
     EMERALD_MIN_EDGE_ABS = 0.85
     EMERALD_MIN_EDGE_FRAC = 0.22
 
